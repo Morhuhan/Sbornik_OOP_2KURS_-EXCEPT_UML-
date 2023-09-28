@@ -1,0 +1,179 @@
+// 2018 ReVoL Primer Template
+// main.cpp
+
+// ОТИ НИЯУ МИФИ
+// 1ПО-00Д
+// Пономарев Владимир Вадимович
+// Объектно-ориентированное программирование
+// OOPHW1. Перегрузка операций
+// 01.01.2000
+
+using namespace std;
+
+#include <math.h>
+#include <stdio.h>
+#include <iostream>
+
+struct lamp_a {
+    int turnedon;
+};
+
+struct lamp_b {
+    int turnedon;
+
+    void init()  {
+        turnedon = 0;
+    }
+};
+
+class lamp_c {
+
+    int state;
+
+public:
+    
+    void init() {
+        state = 0;
+    }
+
+    void off() {
+        state = 0;
+    }
+
+    void on() {
+        state = 1;
+    }
+
+    int is_off() {
+        return state == 0;
+    }
+
+    int is_on() {
+        return state != 0;
+    }
+
+};
+
+class lamp_d {
+    
+    int state;
+
+public:
+
+    lamp_d() {
+        state = 0;
+    }
+
+    void off() {
+        state = 0;
+    }
+
+    void on() {
+        state = 1;
+    }
+
+    int is_off() {
+        return state == 0;
+    }
+
+    int is_on() {
+        return state != 0;
+    }
+
+};
+
+class nat {
+
+private:
+
+    // Храним значение
+    int num = 0;
+
+public:
+
+    // Конструктор по умолчанию
+    nat() {
+        num = 0;
+    }
+
+    // Контсруктор приведения
+    nat(int Value) {
+
+        if (Value < 0) {
+            cout << "Value cannot be negatibe\n";
+            num = -1 * (Value);
+        }
+
+        else {
+            num = Value;
+        }
+    }
+
+    int retVal() {
+        // Возвращаемое значение
+        return num;
+    }
+
+    // Префиксный инкремент
+    nat operator++ (void) {
+        return nat(++num);
+    }
+
+    // Постфиксный инкремент
+    nat operator++ (int) {
+
+        // Сохраняем текущее значение во времени в переменную temp
+        nat temp(num);
+
+        num++;
+
+        return temp;
+    }
+
+    int getnum() {
+        return num;
+    }
+
+};
+
+// Тестирование операций
+int main() {
+
+    lamp_a a;
+
+    a.turnedon = 0;
+
+    cout << "Lamp a: " << a.turnedon << endl;
+
+    lamp_b b;
+
+    b.init();
+
+    cout << "Lamp b: " << b.turnedon << endl;
+
+    lamp_c c;
+
+    cout << "Lamp c turned on: " << c.is_on() << endl;
+
+    c.on();
+
+    cout << "Lamp c turned on: " << c.is_on() << endl;
+
+    lamp_d d;
+
+    cout << "Lamp d turned on: " << d.is_on() << endl;
+
+    d.on();
+
+    cout << "Lamp d turned on: " << d.is_on() << endl;
+
+
+    //int arr[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    //nat b;
+
+    //for (int i = 0; i < 10; i++) {
+    //    cout << "arr = " << arr[b++.getnum()] << "\n";
+    //}
+
+    return 0;
+}
